@@ -1,0 +1,20 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    #service_name:
+    #    class: AppBundle\Directory\ClassName
+    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    poll.service:
+        class: AdminBundle\Manager\PollManager
+        arguments: [ "@doctrine.orm.entity_manager", "AdminBundle:Poll" ]
+
+    question.service:
+        class: AdminBundle\Manager\QuestionManager
+        arguments: [ "@doctrine.orm.entity_manager", "AdminBundle:Question" ]
+
+    user.service:
+        class: AdminBundle\Manager\UserManager
+        arguments: [ "@doctrine.orm.entity_manager", "AdminBundle:User" ]

@@ -1,0 +1,23 @@
+{#{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+{% include "@FOSUser/Profile/edit_content.html.twig" %}
+{% endblock fos_user_content %}#}
+
+
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block pageId %}id="profil"{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ include('::header.html.twig') }}
+
+    <div class="container">
+        {% include "@FOSUser/Profile/edit_content.html.twig" %}
+    </div>
+{% endblock %}

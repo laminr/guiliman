@@ -1,0 +1,22 @@
+<header>
+    <h1>Guiliman</h1>
+
+    <nav class="container">
+    {% if app.user.username is defined %}
+        Bonjour {{ app.user.person }}
+
+        <ul class="right">
+            <li>
+                <a href="{{ path('fos_user_profile_show') }}">
+                    Mon compte
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('fos_user_security_logout') }}">
+                    Déconnexion
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+    </nav>
+</header>

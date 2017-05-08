@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('::header.html.twig') }}
+
+    <div class="container">
+        <h2>Sondage</h2>
+        {% for question in questions %}
+            <div class="row poll-item">
+                <div class="col s5">
+                    {{ question.label }}
+                </div>
+                <div class="col s5">
+                    {% for answer in question.answers %}
+                        <span class="poll-answer">{{ answer }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col s2">
+                    <a href="{{ path('homepage') }}" class="btn btn-small right">
+                        répondre
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

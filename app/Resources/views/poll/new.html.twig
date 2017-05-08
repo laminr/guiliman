@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ include('::header.html.twig') }}
+
+    <main class="container">
+        <h3>Je réponds</h3>
+
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input type="submit" class="btn right" value="Valider"/>
+                {{ form_end(form) }}
+
+                <a href="{{ path('poll_index') }}" class="btn">Annuler</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

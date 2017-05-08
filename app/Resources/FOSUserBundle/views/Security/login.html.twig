@@ -1,0 +1,62 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block pageId %}id="login"{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ include('::header.html.twig') }}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                {% for type, messages in app.session.flashBag.all %}
+                    {% for message in messages %}
+                        <div class="{{ type }}">
+                            {{ message|trans({}, 'FOSUserBundle') }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div id="security_container" class="col s12 m6 offset-m3">
+                {% if error %}
+                    <div>
+                    <span class="chip white-text red-vyta red right">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </span>
+                    </div>
+                {% endif %}
+                <div>
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab col s6"><a href="#tab_login">Connexion</a></li>
+                                <li class="tab col s6"><a href="#tab_register">S'enregistrer</a></li>
+                            </ul>
+                        </div>
+                        <div id="tab_login" class="col s12">
+                            {{ include('FOSUserBundle:Security:login_content.html.twig') }}
+                        </div>
+                        <div id="tab_register" class="col s12">
+                            {{ render(url('fos_user_registration_register')) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('ul.tabs').tabs();
+        });
+    </script>
+{% endblock %}

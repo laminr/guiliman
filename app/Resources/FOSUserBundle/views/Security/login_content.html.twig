@@ -1,0 +1,38 @@
+{% block fos_user_content %}
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        {% if target_path is defined %}
+            <input type="hidden" name="_target_path" value="{{ target_path }}"/>
+        {% endif %}
+        <div class="input-field">
+            <input class="form-control" type="text" id="username" name="_username"
+                   value="{{ last_username }}" required="required"/>
+            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+        </div>
+        <div class="input-field">
+            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="password" id="password" name="_password" required="required"/>
+        </div>
+
+        <div class="row">
+            <div class="col m6">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+            </div>
+
+            <div class="col s6">
+                <div class="right-align">
+                    <input type="submit" id="_submit" name="_submit" class="btn secondary-vyta white-text right-align"
+                           value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+                </div>
+                <div class="right-align">
+                    <a href="{{ path('fos_user_resetting_request') }}" class="right-aligned">
+                        <small class="text-center">
+                            {{ 'home.sign.forgot'| trans }}
+                        </small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock fos_user_content %}
