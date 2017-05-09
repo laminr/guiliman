@@ -2,6 +2,8 @@
 
 namespace AdminBundle\Repository;
 
+use AdminBundle\Entity\Person;
+
 /**
  * AnswerRepository
  *
@@ -10,4 +12,16 @@ namespace AdminBundle\Repository;
  */
 class PersonRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPersonForUser($userId = 0)
+    {
+
+        $sql = 'SELECT p as nbr FROM ' . Person::CLASS_NAME . ' p '
+            . ' WHERE p.user = :userId';
+
+        $query = $this->getEntityManager()->createQuery($sql);
+        $query->setParameter('userId', $userId);
+
+        return $query->getResult()[0] ?? null;
+
+    }
 }

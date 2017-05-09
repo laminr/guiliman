@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Person
 {
+    const CLASS_NAME = "AdminBundle:Person";
+
     /**
      * @var int
      *
@@ -174,6 +176,10 @@ class Person
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    public function setUserNull() {
+        $this->user = null;
     }
 }
 

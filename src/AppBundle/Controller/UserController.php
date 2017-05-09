@@ -2,10 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AdminBundle\Entity\Person;
 use AdminBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * User controller.
@@ -16,27 +20,38 @@ class UserController extends Controller
 {
 
     /**
+     * Displays a form to edit an existing question entity.
      *
-     * @Route("/set-person/{id}", name="user_person_edit")
+     * @Route("/{id}/edit", name="user_person_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, User $user)
     {
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
-echo 1;
+
+        echo "TYPE=".($request->isMethod('POST') == true ? " POST " : " GET ");
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            echo 2;
-            $me = $this->getUser();
 
-            echo "is null:" . ($me->getPerson() == null);
+            $service = $this->get('person.service');
+            $previousPerson = $service->getPersonForUser($user->getId());
 
-            $me->setPerson($user->getPerson());
-            $this->get('user.service')->save($me);
+            if ($previousPerson != null) {
+                foreach ($previousPerson as $old) {
+                    print_r(sizeof($old));
+                    $old->setUserNull();
+                    $service->save($old);
+                }
+            }
+
+            $p = $service->findById($user->getPerson()->getId());
+            $p->setUser($user);
+            $service->save($p);
 
             return $this->redirectToRoute('homepage');
         }
-echo 3;
+
         return $this->render('user/edit.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView()

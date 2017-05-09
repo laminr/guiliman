@@ -12,7 +12,10 @@
                 </div>
                 <div class="col s5">
                     {% for answer in question.answers %}
-                        <span class="poll-answer">{{ answer }}</span>
+                        <div class="poll-answer">
+                            0%
+                            <div>{{ answer }}</div>
+                        </div>
                     {% endfor %}
                 </div>
                 <div class="col s2">

@@ -18,3 +18,7 @@ services:
     user.service:
         class: AdminBundle\Manager\UserManager
         arguments: [ "@doctrine.orm.entity_manager", "AdminBundle:User" ]
+
+    person.service:
+        class: AdminBundle\Manager\PersonManager
+        arguments: [ "@doctrine.orm.entity_manager", "AdminBundle:Person" ]
