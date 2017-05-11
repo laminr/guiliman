@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AdminBundle\Entity\Answer;
 use AdminBundle\Entity\Poll;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -121,11 +122,29 @@ class PollController extends Controller
      */
     public function editAction(Request $request, Poll $poll)
     {
+        $me = $this->getUser()->getPerson();
+
         $editForm = $this->createForm('AdminBundle\Form\PollType', $poll);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            $person = $editForm->getData()->getPerson();
+            // vote for someone else
+            if ($me != $person) {
+                return $this->redirectToRoute(
+                    'poll_answer_topool', [
+                        'personId' => $person->getId(),
+                        'questionId' => $poll->getQuestion()->getId(),
+                        'answerId' =>  $poll->getAnswer()->getId()
+                    ]
+                );
+            }
+            // Just update
+            else {
+                echo 5;
+                //$this->getDoctrine()->getManager()->flush();
+            }
 
             return $this->redirectToRoute('homepage');
         }
@@ -134,6 +153,46 @@ class PollController extends Controller
             'poll' => $poll,
             'edit_form' => $editForm->createView(),
         ));
+    }
+
+    /**
+     *
+     * @Route("/save/{personId}/{questionId}/{answerId}", name="poll_answer_topool")
+     * @Method("GET")
+     * @param Request $request
+     * @param int $personId
+     * @param int $questionId
+     * @param int $answerId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function setAnswerToPollAction(Request $request, $personId = 0, $questionId = 0, $answerId = 0)
+    {
+        echo "personId".$personId;
+        echo "questionId".$questionId;
+        echo "answer".$answerId;
+
+        $person = $this->get('person.service')->findById($personId);
+        $answer = $this->get('answer.service')->findById($answerId);
+
+        $service =  $this->get('poll.service');
+
+        $poll = $service->findByPerson($person);
+
+        if ($poll != null) {
+            $poll->setAnswer($answer);
+            $service->save($poll);
+        } else {
+            $question = $this->get('question.service')->findById($questionId);
+
+            $already = new Poll();
+            $already->setQuestion($question);
+            $already->setPerson($person);
+            $already->setAnswer($answer);
+
+            $service->save($already);
+        }
+
+        return $this->redirectToRoute('homepage');
     }
 
     /**

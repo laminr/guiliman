@@ -22,3 +22,7 @@ services:
     person.service:
         class: AdminBundle\Manager\PersonManager
         arguments: [ "@doctrine.orm.entity_manager", "AdminBundle:Person" ]
+
+    answer.service:
+        class: AdminBundle\Manager\AnswerManager
+        arguments: [ "@doctrine.orm.entity_manager", "AdminBundle:Answer" ]
