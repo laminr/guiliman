@@ -1,6 +1,9 @@
 body {
   font-family: "Poiret One", cursive; }
 
+.text-center {
+  text-align: center; }
+
 header {
   background: #180d0c;
   padding: 50px 0 0;
