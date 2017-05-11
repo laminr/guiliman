@@ -60,7 +60,7 @@ class PollController extends Controller
     /**
      * Creates a new poll entity.
      *
-     * @Route("/new/{id}", name="poll_new")
+     * @Route("/new/{id}", name="poll_person_answer")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param int $id
@@ -68,9 +68,16 @@ class PollController extends Controller
      */
     public function newForUserAction(Request $request, $id = 0)
     {
+        $person = $this->getUser()->getPerson();
+
+        $poll = $this->get('poll.service')->findByPerson($person);
+        if ($poll != null) {
+            return $this->redirectToRoute('poll_edit', [ 'id' => $poll->getId()]);
+        }
+
         $poll = new Poll();
         $poll->setQuestion($this->get('question.service')->findById($id));
-        $poll->setPerson($this->getUser()->getPerson());
+        $poll->setPerson($person);
 
         $form = $this->createForm('AdminBundle\Form\PollType', $poll);
         $form->handleRequest($request);
@@ -114,20 +121,18 @@ class PollController extends Controller
      */
     public function editAction(Request $request, Poll $poll)
     {
-        $deleteForm = $this->createDeleteForm($poll);
         $editForm = $this->createForm('AdminBundle\Form\PollType', $poll);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('poll_edit', array('id' => $poll->getId()));
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('poll/edit.html.twig', array(
             'poll' => $poll,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

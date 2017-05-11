@@ -19,7 +19,7 @@
                     {% endfor %}
                 </div>
                 <div class="col s2">
-                    <a href="{{ path('homepage') }}" class="btn btn-small right">
+                    <a href="{{ path('poll_person_answer', { 'id' : question.id }) }}" class="btn btn-small right">
                         répondre
                     </a>
                 </div>

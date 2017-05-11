@@ -10,4 +10,17 @@ namespace AdminBundle\Repository;
  */
 class PollRepository extends \Doctrine\ORM\EntityRepository
 {
+
+//    public function findByPersonId($userId = 0)
+//    {
+//
+//        $sql = 'SELECT p as nbr FROM ' . Person::CLASS_NAME . ' p '
+//            . ' WHERE p.user = :userId';
+//
+//        $query = $this->getEntityManager()->createQuery($sql);
+//        $query->setParameter('userId', $userId);
+//
+//        return $query->getResult()[0] ?? null;
+//
+//    }
 }
