@@ -40,7 +40,7 @@ class Person
     /**
      * @var int
      *
-     * @ORM\Column(name="share", type="integer")
+     * @ORM\Column(name="share", type="decimal", precision=10, scale=2)
      */
     private $share;
 

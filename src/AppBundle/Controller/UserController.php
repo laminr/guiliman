@@ -30,8 +30,6 @@ class UserController extends Controller
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
-        echo "TYPE=".($request->isMethod('POST') == true ? " POST " : " GET ");
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
             $service = $this->get('person.service');
