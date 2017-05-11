@@ -6,7 +6,7 @@
             <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
             <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
             <div>
-                <a href="{{ url('user_person_edit', {'id' : app.user.id }) }}" class="btn right">MAJ</a>
+                <a href="{{ url('fos_user_profile_edit', {'id' : app.user.id }) }}" class="btn right">MAJ</a>
             </div>
         </div>
     </div>
