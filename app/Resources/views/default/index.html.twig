@@ -4,30 +4,40 @@
     {{ include('::header.html.twig') }}
 
     <div class="container">
-        <h2>Sondage</h2>
-        {% for question in questions %}
+        <h2>
+            Sondage
+        </h2>
+        {% for dto in dtos %}
             <div class="row poll-item">
-                <div class="col s5">
-                    {{ question.label }}
-                </div>
-                <div class="col s5">
-                    {% for answer in question.answers %}
-                        <div class="poll-answer">
-                            0%
-                            <div>{{ answer }}</div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="col s2">
-                    <a href="{{ path('poll_person_answer', { 'id' : question.id }) }}" class="btn btn-small right">
+                <div class="col s12 question-title">
+                    {{ dto.question.label }}
+                    <a href="{{ path('poll_person_answer', { 'id' : dto.question.id }) }}" class="btn btn-small right">
                         répondre
                     </a>
+                </div>
+                <div class="col s12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            {% for label, values in dto.percents | first %}
+                                <th>{{ label }}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        {% for title, stats in dto.percents %}
+                            <tr>
+                                <td>{{ title }}</td>
+
+                                {% for label, values in stats %}
+                                    <td class="figures">{{ values }} %</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
         {% endfor %}
     </div>
 {% endblock %}
 
-{% block stylesheets %}
-
-{% endblock %}

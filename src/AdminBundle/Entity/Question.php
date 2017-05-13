@@ -117,7 +117,7 @@ class Question
     /**
      * @return array
      */
-    public function getPolls(): array
+    public function getPolls()
     {
         return $this->polls;
     }
@@ -125,7 +125,7 @@ class Question
     /**
      * @param array $polls
      */
-    public function setPolls(array $polls)
+    public function setPolls($polls)
     {
         $this->polls = $polls;
     }

@@ -4,7 +4,23 @@ body {
   font-family: $font-family-title;
 }
 
+.question-title {
+  background: #180d0c;
+  color: $color-primary-light;
+  padding: 10px !important;
+  font-weight: bold;
+}
+
 .text-center {
+  text-align: center;
+}
+
+th {
+  text-align: center;
+}
+
+.figures {
+  font-family: $font-figures;
   text-align: center;
 }
 
@@ -32,7 +48,6 @@ h1 {
   font-size: 1.3em;
   border-radius: 2px;
   margin-bottom: 5px;
-  padding-top: 5px;
   padding-bottom: 5px;
 }
 

@@ -24,4 +24,23 @@ class PersonRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult()[0] ?? null;
 
     }
+
+    public function getNbPerson()
+    {
+
+        $sql = 'SELECT COUNT(p) as nbr FROM ' . Person::CLASS_NAME . ' p ';
+        $query = $this->getEntityManager()->createQuery($sql);
+
+        return $query->getResult()[0];
+
+    }
+    public function getTotalShare()
+    {
+
+        $sql = 'SELECT SUM(p.share) as nbr FROM ' . Person::CLASS_NAME . ' p ';
+        $query = $this->getEntityManager()->createQuery($sql);
+
+        return $query->getResult()[0];
+
+    }
 }

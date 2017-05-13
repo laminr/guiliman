@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Person</th>
+                <th>Share</th>
                 <th>Answer</th>
                 <th>Actions</th>
             </tr>
@@ -15,6 +16,7 @@
         {% for poll in polls %}
             <tr>
                 <td>{{ poll.person }}</td>
+                <td>{{ poll.person.share }}</td>
                 <td>{{ poll.answer }}</td>
                 <td>
                     <ul>

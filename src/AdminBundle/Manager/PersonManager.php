@@ -29,6 +29,14 @@ class PersonManager extends BaseManager
         return $this->getRepository()->getPersonForUser($userId);
     }
 
+    public function getNbPerson() {
+        return $this->getRepository()->getNbPerson();
+    }
+
+    public function getTotalShare() {
+        return $this->getRepository()->getTotalShare();
+    }
+
     /**
      * Save Project entity
      *
