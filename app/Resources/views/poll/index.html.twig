@@ -1,41 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Polls list</h1>
+    {{ include('::header.html.twig') }}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Person</th>
-                <th>Share</th>
-                <th>Answer</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for poll in polls %}
-            <tr>
-                <td>{{ poll.person }}</td>
-                <td>{{ poll.person.share }}</td>
-                <td>{{ poll.answer }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('poll_show', { 'id': poll.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('poll_edit', { 'id': poll.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+    <div class="container">
+        <h2>Consultations</h2>
+        {% for dto in dtos %}
+            <div class="row poll-item">
+                <div class="col s12 question-title">
+                    {{ dto.question.label }}
+                    <a href="{{ path('poll_person_answer', { 'id' : dto.question.id }) }}" class="btn btn-small right">
+                        répondre
+                    </a>
+                </div>
+                <div class="col s12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            {% for label, values in dto.percents | first %}
+                                <th>{{ label }}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        {% for title, stats in dto.percents %}
+                            <tr>
+                                <td>{{ title }}</td>
+
+                                {% for label, values in stats %}
+                                    <td class="figures">{{ values }} %</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('poll_new') }}">Create a new poll</a>
-        </li>
-    </ul>
+    </div>
 {% endblock %}

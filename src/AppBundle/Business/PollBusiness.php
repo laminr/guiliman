@@ -14,13 +14,13 @@ use AppBundle\Dto\QuestionDto;
 class PollBusiness
 {
 
-    public static function makePollPercent(Question $question, $totalPerson = 0, $totalShare = 0) {
+    public static function makePollPercent(Question $question, $totalPerson = 0, $totalShare = 1) {
 
         $answerShare = array();
         $shares = array();
 
         $personHadAnswered = sizeof($question->getPolls());
-        $totalShareAnswered = 0;
+        $totalShareAnswered = 1;
 
         $labelOnlyAnswer = "Avec $personHadAnswered reponse(s) sur $totalPerson";
         $labelAllPerson = "Sur l'ensemble des parts";

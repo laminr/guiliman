@@ -1,10 +1,9 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Answer;
 use AdminBundle\Entity\Poll;
-use AppBundle\Business\PollBusiness;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -19,53 +18,29 @@ class PollController extends Controller
     /**
      * Lists all poll entities.
      *
-     * @Route("/", name="poll_index")
+     * @Route("/", name="_admin_poll_index")
      * @Method("GET")
      */
     public function indexAction()
     {
-        if ($this->getUser()->getPerson() == null) {
-            return $this->redirectToRoute('user_person_edit', ['id' => $this->getUser()->getId()]);
-        }
+        $em = $this->getDoctrine()->getManager();
 
-        $dtos = [];
-        $questions = $this->get('question.service')->findAll();
+        $polls = $em->getRepository('AdminBundle:Poll')->findAll();
 
-        $nbPerson = $this->get('person.service')->getNbPerson()["nbr"];
-        $totalShare = $this->get('person.service')->getTotalShare()["nbr"];
-
-        foreach ($questions as $question) {
-            $dtos[] = PollBusiness::makePollPercent($question, $nbPerson, $totalShare);
-        }
-
-        // replace this example code with whatever you need
-        return $this->render('poll/index.html.twig', [
-            'dtos' => $dtos
-        ]);
+        return $this->render('poll/index.html.twig', array(
+            'polls' => $polls,
+        ));
     }
 
     /**
      * Creates a new poll entity.
      *
-     * @Route("/new/{id}", name="poll_person_answer")
+     * @Route("/new", name="_admin_poll_new")
      * @Method({"GET", "POST"})
-     * @param Request $request
-     * @param int $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newForUserAction(Request $request, $id = 0)
+    public function newAction(Request $request)
     {
-        $person = $this->getUser()->getPerson();
-
-        $poll = $this->get('poll.service')->findByPerson($person);
-        if ($poll != null) {
-            return $this->redirectToRoute('poll_edit', [ 'id' => $poll->getId()]);
-        }
-
         $poll = new Poll();
-        $poll->setQuestion($this->get('question.service')->findById($id));
-        $poll->setPerson($person);
-
         $form = $this->createForm('AdminBundle\Form\PollType', $poll);
         $form->handleRequest($request);
 
@@ -74,13 +49,68 @@ class PollController extends Controller
             $em->persist($poll);
             $em->flush();
 
-            //return $this->redirectToRoute('poll_show', array('id' => $poll->getId()));
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('poll_show', array('id' => $poll->getId()));
         }
 
         return $this->render('poll/new.html.twig', array(
             'poll' => $poll,
             'form' => $form->createView(),
+        ));
+    }
+//
+//    /**
+//     * Creates a new poll entity.
+//     *
+//     * @Route("/new/{id}", name="poll_person_answer")
+//     * @Method({"GET", "POST"})
+//     * @param Request $request
+//     * @param int $id
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+//     */
+//    public function newForUserAction(Request $request, $id = 0)
+//    {
+//        $person = $this->getUser()->getPerson();
+//
+//        $poll = $this->get('poll.service')->findByPerson($person);
+//        if ($poll != null) {
+//            return $this->redirectToRoute('poll_edit', [ 'id' => $poll->getId()]);
+//        }
+//
+//        $poll = new Poll();
+//        $poll->setQuestion($this->get('question.service')->findById($id));
+//        $poll->setPerson($person);
+//
+//        $form = $this->createForm('AdminBundle\Form\PollType', $poll);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($poll);
+//            $em->flush();
+//
+//            //return $this->redirectToRoute('poll_show', array('id' => $poll->getId()));
+//            return $this->redirectToRoute('homepage');
+//        }
+//
+//        return $this->render('poll/new.html.twig', array(
+//            'poll' => $poll,
+//            'form' => $form->createView(),
+//        ));
+//    }
+
+    /**
+     * Finds and displays a poll entity.
+     *
+     * @Route("/{id}", name="poll_show")
+     * @Method("GET")
+     */
+    public function showAction(Poll $poll)
+    {
+        $deleteForm = $this->createDeleteForm($poll);
+
+        return $this->render('poll/show.html.twig', array(
+            'poll' => $poll,
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -112,7 +142,8 @@ class PollController extends Controller
             }
             // Just update
             else {
-                $this->getDoctrine()->getManager()->flush();
+                echo 5;
+                //$this->getDoctrine()->getManager()->flush();
             }
 
             return $this->redirectToRoute('homepage');
@@ -164,4 +195,39 @@ class PollController extends Controller
         return $this->redirectToRoute('homepage');
     }
 
+    /**
+     * Deletes a poll entity.
+     *
+     * @Route("/{id}", name="poll_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Poll $poll)
+    {
+        $form = $this->createDeleteForm($poll);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($poll);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('poll_index');
+    }
+
+    /**
+     * Creates a form to delete a poll entity.
+     *
+     * @param Poll $poll The poll entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Poll $poll)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('poll_delete', array('id' => $poll->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
 }
