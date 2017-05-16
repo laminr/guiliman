@@ -1,11 +1,15 @@
 body {
   font-family: "Poiret One", cursive; }
 
-.question-title {
+a.link {
+  color: #26a69a !important; }
+
+.question-title-sum {
   background: #180d0c;
   color: #30d0c1;
-  padding: 10px !important;
-  font-weight: bold; }
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 2px; }
 
 .text-center {
   text-align: center; }
@@ -25,6 +29,13 @@ header {
   header h1 {
     padding: 0;
     margin: 0; }
+    header h1 > a {
+      color: #26a69a; }
+  header .home-link > i {
+    float: left;
+    margin-top: 3px;
+    margin-right: 10px;
+    color: #26a69a; }
 
 h1 {
   margin-top: 50px;
@@ -33,11 +44,9 @@ h1 {
   text-align: center; }
 
 .poll-item {
-  border: 1px Solid green;
   font-size: 1.3em;
   border-radius: 2px;
-  margin-bottom: 5px;
-  padding-bottom: 5px; }
+  margin-bottom: 5px; }
 
 .poll-answer {
   padding: 10px;
@@ -56,5 +65,19 @@ nav {
 
 .tabs .tab a:hover, .tabs .tab a.active {
   color: #26a69a; }
+
+.poll-item {
+  font-size: 1.3em;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  padding: 5px 10px; }
+  .poll-item > div {
+    border: 1px solid black; }
+
+.question-title {
+  background: #180d0c;
+  color: #30d0c1;
+  padding: 10px !important;
+  font-weight: bold; }
 
 /*# sourceMappingURL=styles.css.map */
