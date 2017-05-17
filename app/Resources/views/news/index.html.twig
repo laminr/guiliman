@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('::header.html.twig') }}
+
+    <main class="container">
+        <h1>News list</h1>
+        <a href="{{ path('admin_news_new')}}" class="btn right">+</a>
+
+        <div class="row">
+            <div class="col s12">
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Value</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for news in news %}
+                        <tr class="row">
+                            <td>{% if news.publication %}{{ news.publication|date('d-m-Y') }}{% endif %}</td>
+                            <td>{{ news.value | raw }}</td>
+                            <td>
+                                <a href="{{ path('admin_news_edit', { 'id': news.id }) }}" class="btn">edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
