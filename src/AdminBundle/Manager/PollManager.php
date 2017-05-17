@@ -24,8 +24,8 @@ class PollManager extends BaseManager
         return $this->getRepository()->findOneById($id);
     }
 
-    public function findByPerson($person) {
-        return $this->getRepository()->findOneByPerson($person);
+    public function findByPerson($questionId, $person) {
+        return $this->getRepository()->findOneBy(['question' => $questionId, 'person' => $person]);
     }
 
     /**

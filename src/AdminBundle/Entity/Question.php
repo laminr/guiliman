@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Question
 {
+    const CLASS_NAME = "AdminBundle:Question";
+
     /**
      * @var int
      *

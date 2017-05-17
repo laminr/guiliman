@@ -13,7 +13,7 @@
                 {% for dto in dtos %}
                     <div class="row poll-item">
                         <div class="question-title-sum">
-                            <a href="{{ path('poll_index', { 'id' : dto.question.id }) }}" class="link">
+                            <a href="{{ path('poll_index') }}#poll_{{ dto.question.id }}" class="link">
                                 {{ dto.question.label }}
                                 <span class="right"> > </span>
                             </a>
