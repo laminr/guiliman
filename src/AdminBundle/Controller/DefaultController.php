@@ -12,8 +12,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $questions = $this->get('question.service')->findAll();
-
-        return $this->render('AdminBundle:Default:index.html.twig');
+        return $this->redirectToRoute('admin_news_index');
     }
 }
