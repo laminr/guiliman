@@ -21,7 +21,11 @@
                     {% for news in news %}
                         <tr class="row">
                             <td>{% if news.publication %}{{ news.publication|date('d-m-Y') }}{% endif %}</td>
-                            <td>{{ news.value | raw }}</td>
+                            <td>
+                                <article>
+                                    {{ news.value | raw }}
+                                </article>
+                            </td>
                             <td>
                                 <a href="{{ path('admin_news_edit', { 'id': news.id }) }}" class="btn">edit</a>
                             </td>
