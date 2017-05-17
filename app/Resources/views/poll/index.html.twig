@@ -6,7 +6,7 @@
     <div class="container">
         <h2>Consultations</h2>
         {% for dto in dtos %}
-            <div class="row poll-item">
+            <div class="row poll-item" id="poll_{{ dto.question.id }}">
                 <div class="col s12 question-title">
                     {{ dto.question.label }}
                     <a href="{{ path('poll_person_answer', { 'id' : dto.question.id }) }}" class="btn btn-small right">

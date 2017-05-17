@@ -8,9 +8,11 @@
     <nav class="container">
     {% if app.user.username is defined %}
         <div class="left">
-            <a href="{{ path('homepage') }}" class="left home-link">
-                <i class="material-icons">home</i>
-            </a>
+            <div id="home">
+                <a href="{{ path('homepage') }}" class="left home-link">
+                    <i class="material-icons">home</i>
+                </a>
+            </div>
             Bonjour {{ app.user.person }}
         </div>
 

@@ -57,7 +57,7 @@ class PollController extends Controller
     {
         $person = $this->getUser()->getPerson();
 
-        $poll = $this->get('poll.service')->findByPerson($person);
+        $poll = $this->get('poll.service')->findByPerson($id, $person);
         if ($poll != null) {
             return $this->redirectToRoute('poll_edit', [ 'id' => $poll->getId()]);
         }
@@ -66,7 +66,7 @@ class PollController extends Controller
         $poll->setQuestion($this->get('question.service')->findById($id));
         $poll->setPerson($person);
 
-        $form = $this->createForm('AdminBundle\Form\PollType', $poll);
+        $form = $this->createForm('AdminBundle\Form\PollType', $poll, ['attr' => ['questionId' => $poll->getQuestion()]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -94,11 +94,14 @@ class PollController extends Controller
     {
         $me = $this->getUser()->getPerson();
 
-        $editForm = $this->createForm('AdminBundle\Form\PollType', $poll);
+        $editForm = $this->createForm(
+            'AdminBundle\Form\PollType',
+            $poll,
+            ['attr' => ['questionId' => $poll->getQuestion()]]
+        );
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
             $person = $editForm->getData()->getPerson();
             // vote for someone else
             if ($me != $person) {
@@ -115,7 +118,7 @@ class PollController extends Controller
                 $this->getDoctrine()->getManager()->flush();
             }
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('poll_index');
         }
 
         return $this->render('poll/edit.html.twig', array(
@@ -136,16 +139,13 @@ class PollController extends Controller
      */
     public function setAnswerToPollAction(Request $request, $personId = 0, $questionId = 0, $answerId = 0)
     {
-        echo "personId".$personId;
-        echo "questionId".$questionId;
-        echo "answer".$answerId;
 
         $person = $this->get('person.service')->findById($personId);
         $answer = $this->get('answer.service')->findById($answerId);
 
         $service =  $this->get('poll.service');
 
-        $poll = $service->findByPerson($person);
+        $poll = $service->findByPerson($questionId, $person);
 
         if ($poll != null) {
             $poll->setAnswer($answer);
@@ -161,7 +161,7 @@ class PollController extends Controller
             $service->save($already);
         }
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('poll_index');
     }
 
 }
