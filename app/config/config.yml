@@ -77,3 +77,28 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+
+ivory_ck_editor:
+    configs:
+        ck_config:
+            toolbar: "my_toolbar"
+            autoParagraph: false
+
+#    https://www.remipoignon.fr/12-symfony-2-editeur-wiziwig-ckeditor-avec-ivoryckeditorbundle
+    toolbars:
+        configs:
+            my_toolbar: [ "@format", "@shape", "@clipboard", "@search", "/",  "@links", "@external", "@color", "@remove", "@max", "@preview" ]
+
+        items:
+            preview: [ 'Preview' ]
+            clipboard: [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ]
+            search: [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ]
+            source: [ 'Source' ]
+            format: [ 'Bold','Italic','Underline','Strike', 'Blockquote','Subscript','Superscript','-','RemoveFormat' ]
+            shape: [ 'NumberedList','BulletedList','-','Outdent','Indent','-','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ]
+            links: [ 'Link','Unlink','Anchor' ]
+            external: [ 'pbckcode', 'Image', 'Video', 'Table','SpecialChar','Iframe' ]
+            styles: [ 'Styles', 'Format','Font','FontSize' ]
+            color:  [ 'TextColor','BGColor' ]
+            remove: [ 'RemoveFormat' ]
+            max: [ 'Maximize' ]
