@@ -1,41 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Polls list</h1>
+    {{ include('::header.html.twig') }}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Person</th>
-                <th>Share</th>
-                <th>Answer</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for poll in polls %}
-            <tr>
-                <td>{{ poll.person }}</td>
-                <td>{{ poll.person.share }}</td>
-                <td>{{ poll.answer }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('poll_show', { 'id': poll.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('poll_edit', { 'id': poll.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <main class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2 l6 offset-l3">
+                <h1>Polls list</h1>
+                {#<a class="right btn" href="{{ path('_admin_poll_new') }}">#}
+                    {#Create a new poll#}
+                {#</a>#}
 
-    <ul>
-        <li>
-            <a href="{{ path('poll_new') }}">Create a new poll</a>
-        </li>
-    </ul>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Person</th>
+                        <th>Share</th>
+                        <th>Answer</th>
+                        {#<th>Actions</th>#}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for poll in polls %}
+                        <tr>
+                            <td>{{ poll.question }}</td>
+                            <td>{{ poll.person }}</td>
+                            <td>{{ poll.person.share }}</td>
+                            <td>{{ poll.answer }}</td>
+{#                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('poll_show', { 'id': poll.id }) }}">show</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('poll_edit', { 'id': poll.id }) }}">edit</a>
+                                    </li>
+                                </ul>
+                            </td>#}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 {% endblock %}

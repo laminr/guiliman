@@ -27,7 +27,7 @@ class PollController extends Controller
 
         $polls = $em->getRepository('AdminBundle:Poll')->findAll();
 
-        return $this->render('poll/index.html.twig', array(
+        return $this->render('AdminBundle:poll:index.html.twig', array(
             'polls' => $polls,
         ));
     }
@@ -41,7 +41,11 @@ class PollController extends Controller
     public function newAction(Request $request)
     {
         $poll = new Poll();
-        $form = $this->createForm('AdminBundle\Form\PollType', $poll);
+        $form = $this->createForm(
+            'AdminBundle\Form\PollType',
+                $poll,
+            ['attr' => ['questionId' => 0]]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,7 +56,7 @@ class PollController extends Controller
             return $this->redirectToRoute('poll_show', array('id' => $poll->getId()));
         }
 
-        return $this->render('poll/new.html.twig', array(
+        return $this->render('AdminBundle:poll:new.html.twig', array(
             'poll' => $poll,
             'form' => $form->createView(),
         ));

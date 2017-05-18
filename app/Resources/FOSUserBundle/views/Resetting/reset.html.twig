@@ -1,5 +1,14 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
 {% block fos_user_content %}
-{% include "@FOSUser/Resetting/reset_content.html.twig" %}
+    {{ include('::header.html.twig') }}
+
+    <main class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2 l6 offset-l3">
+                {% include "@FOSUser/Resetting/reset_content.html.twig" %}
+            </div>
+        </div>
+    </main>
+
 {% endblock fos_user_content %}
