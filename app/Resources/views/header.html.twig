@@ -27,6 +27,11 @@
                     Déconnexion
                 </a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ path('admin_default_index') }}">Gestion</a>
+            </li>
+            {% endif %}
         </ul>
     {% endif %}
     </nav>

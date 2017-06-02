@@ -5,6 +5,15 @@ body {
   background: #f1f1f1;
 }
 
+.btn-red {
+  background-color: #b90000;
+  font-family: $font-figures;
+
+  &:hover {
+    background-color: #e80000;
+  }
+}
+
 a.link {
   color : $color-primary !important;
 }

@@ -1,1 +1,41 @@
-Hello Admin!
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Administration</h1>
+        <div class="row">
+            <div class="col s12 m6">
+                {% for news in news %}
+                    <div class="row">
+                        <div class="col s12">
+                            {% if news.publication %}{{ news.publication|date('d-m-Y') }}{% endif %}
+                            <a href="{{ path('admin_news_edit', { 'id': news.id }) }}" class="btn right">edit</a>
+                        </div>
+                        <article class="col s12">
+                                {{ news.value | raw }}
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col s12 m6">
+                {% for dto in dtos %}
+                    <div class="row poll-item">
+                        <div class="question-title-sum">
+                            <a href="{{ path('question_edit', { 'id': dto.id }) }}" class="link">
+                                {{ dto.question }}
+                                <span class="right"> > </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        {% for a in dto.answers %}
+                            <div>{{ a }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

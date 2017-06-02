@@ -51,6 +51,8 @@
 </head>
 <body id="{% block pageId %}{% endblock %}" >
 
+    {{ include('::header.html.twig') }}
+
     {% block body %}{% endblock %}
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

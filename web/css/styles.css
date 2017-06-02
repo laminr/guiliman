@@ -38,6 +38,12 @@ body {
   font-family: "Poiret One", cursive;
   background: #f1f1f1; }
 
+.btn-red {
+  background-color: #b90000;
+  font-family: "Anton", sans-serif; }
+  .btn-red:hover {
+    background-color: #e80000; }
+
 a.link {
   color: #26a69a !important; }
 
