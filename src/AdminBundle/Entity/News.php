@@ -35,6 +35,12 @@ class News
      */
     private $value;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="published", type="boolean", nullable=true)
+     */
+    private $published = false;
 
     /**
      * Get id
@@ -92,6 +98,22 @@ class News
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param bool $published
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
     }
 }
 

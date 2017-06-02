@@ -20,7 +20,7 @@ class DefaultController extends Controller
 
         $dtos = [];
         $questions = $this->get('question.service')->findAll();
-        $news = $this->get('news.service')->findAll();
+        $news = $this->get('news.service')->findAllPublished();
 
         $nbPerson = $this->get('person.service')->getNbPerson()["nbr"];
         $totalShare = $this->get('person.service')->getTotalShare()["nbr"];

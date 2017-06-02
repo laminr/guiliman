@@ -17,7 +17,11 @@
                 {% for news in news %}
                     <div class="row">
                         <div class="col s12">
-                            {% if news.publication %}{{ news.publication|date('d-m-Y') }}{% endif %}
+                            <input type="checkbox" id="pub_{{ news.id }}" {% if news.published %}checked="checked" {% endif %} />
+                            <label for="pub_{{ news.id }}">
+                                {% if news.publication %}{{ news.publication|date('d-m-Y') }}{% endif %}
+                            </label>
+
                             <a href="{{ path('admin_news_edit', { 'id': news.id }) }}" class="secondary-color right">
                                 <i class=" material-icons">edit</i>
                             </a>
