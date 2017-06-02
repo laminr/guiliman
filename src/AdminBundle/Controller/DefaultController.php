@@ -21,7 +21,10 @@ class DefaultController extends Controller
         foreach ($questions as $question) {
             $answers = [];
             foreach ($question->getAnswers() as $answer) {
-                array_push($answers, $answer->getLabel());
+                array_push($answers, [
+                    'id' => $answer->getId(),
+                    'label' => $answer->getLabel()
+                ]);
             }
 
             array_push($dtos, [

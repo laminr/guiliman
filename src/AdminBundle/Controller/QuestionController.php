@@ -48,7 +48,7 @@ class QuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+            return $this->redirectToRoute('admin_default_index');
         }
 
         return $this->render('question/new.html.twig', array(
@@ -88,7 +88,7 @@ class QuestionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('question_edit', array('id' => $question->getId()));
+            return $this->redirectToRoute('admin_default_index');
         }
 
         return $this->render('question/edit.html.twig', array(
@@ -115,7 +115,7 @@ class QuestionController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('question_index');
+        return $this->redirectToRoute('admin_default_index');
     }
 
     /**

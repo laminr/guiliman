@@ -22,9 +22,7 @@ class NewsController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $news = $em->getRepository('AdminBundle:News')->findAll();
+        $news = $this->get('news.service')->findAll();
 
         return $this->render('news/index.html.twig', array(
             'news' => $news,
@@ -48,7 +46,7 @@ class NewsController extends Controller
             $em->persist($news);
             $em->flush();
 
-            return $this->redirectToRoute('admin_news_index');
+            return $this->redirectToRoute('admin_default_index');
         }
 
         return $this->render('news/new.html.twig', array(
@@ -88,7 +86,7 @@ class NewsController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_news_index');
+            return $this->redirectToRoute('admin_default_index');
         }
 
         return $this->render('news/edit.html.twig', array(
@@ -115,7 +113,7 @@ class NewsController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('admin_news_index');
+        return $this->redirectToRoute('admin_default_index');
     }
 
     /**
