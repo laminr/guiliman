@@ -20,6 +20,10 @@ class NewsManager extends BaseManager
         return $this->getRepository()->findBy([], ['publication' => 'DESC']);
     }
 
+    public function findAllPublished() {
+        return $this->getRepository()->findBy(['published' => true], ['publication' => 'DESC']);
+    }
+
     public function findById($id) {
         return $this->getRepository()->findOneById($id);
     }
