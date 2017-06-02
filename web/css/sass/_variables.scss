@@ -6,7 +6,7 @@ $color-red: #b40200;
 $color-blue-dodger: #1098F7;
 $color-baby-powder: #FFFFFA;
 
-$color-yellow: #f9b800;
+$color-orange: #FF5200;
 
 $color-dark: #4a4a4a;
 $color-body: $color-white;
@@ -15,9 +15,9 @@ $color-grey-light: #dfdfdf;
 
 
 $primary: $color-green;
-$secondary: $color-red;
+$secondary: $color-orange;
 
-$color-accent: $color-yellow;
+//$color-accent: $color-yellow;
 
 $color-primary-light: lighten($primary, 10%);
 $color-primary: $primary;
@@ -35,6 +35,11 @@ $font-poiret: 'Poiret One', cursive;
 $font-figures: 'Anton', sans-serif;
 
 $font-family-title: $font-poiret;
+
+.title {
+  color: $color-primary-light;
+  font-size: 1.5em;
+}
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;

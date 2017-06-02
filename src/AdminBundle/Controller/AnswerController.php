@@ -40,6 +40,15 @@ class AnswerController extends Controller
     public function newAction(Request $request)
     {
         $answer = new Answer();
+
+        $id = $request->query->get('id');
+        if ($id != null) {
+            $question = $this->get('question.service')->findById($id);
+            if ($question != null) {
+                $answer->setQuestion($question);
+            }
+        }
+
         $form = $this->createForm('AdminBundle\Form\AnswerType', $answer);
         $form->handleRequest($request);
 
@@ -48,7 +57,7 @@ class AnswerController extends Controller
             $em->persist($answer);
             $em->flush();
 
-            return $this->redirectToRoute('answer_show', array('id' => $answer->getId()));
+            return $this->redirectToRoute('admin_default_index');
         }
 
         return $this->render('answer/new.html.twig', array(
@@ -88,7 +97,7 @@ class AnswerController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('answer_edit', array('id' => $answer->getId()));
+            return $this->redirectToRoute('admin_default_index');
         }
 
         return $this->render('answer/edit.html.twig', array(
@@ -115,7 +124,7 @@ class AnswerController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('answer_index');
+        return $this->redirectToRoute('admin_default_index');
     }
 
     /**

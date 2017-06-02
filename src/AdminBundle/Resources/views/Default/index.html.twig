@@ -3,14 +3,24 @@
 {% block body %}
 
     <div class="container">
-        <h1>Administration</h1>
+        <h1 class="secondary-color">Administration</h1>
         <div class="row">
             <div class="col s12 m6">
+                <div class="row">
+                    <div class="col s12">
+                        <a href="{{ path('admin_news_new') }}" class="btn right btn-floating btn-small">
+                            <i class="large material-icons">add</i>
+                        </a>
+                        <span class="title">Les mots du Pr&eacute;sident</span>
+                    </div>
+                </div>
                 {% for news in news %}
                     <div class="row">
                         <div class="col s12">
                             {% if news.publication %}{{ news.publication|date('d-m-Y') }}{% endif %}
-                            <a href="{{ path('admin_news_edit', { 'id': news.id }) }}" class="btn right">edit</a>
+                            <a href="{{ path('admin_news_edit', { 'id': news.id }) }}" class="secondary-color right">
+                                <i class=" material-icons">edit</i>
+                            </a>
                         </div>
                         <article class="col s12">
                                 {{ news.value | raw }}
@@ -19,20 +29,40 @@
                 {% endfor %}
             </div>
             <div class="col s12 m6">
+                <div class="row">
+                    <div class="col s12">
+                        <a href="{{ path('question_new') }}" class="btn right btn-floating btn-small">
+                            <i class="large material-icons">add</i>
+                        </a>
+                        <span class="title">Consultations</span>
+                    </div>
+                </div>
                 {% for dto in dtos %}
                     <div class="row poll-item">
                         <div class="question-title-sum">
                             <a href="{{ path('question_edit', { 'id': dto.id }) }}" class="link">
                                 {{ dto.question }}
-                                <span class="right"> > </span>
+                                <span class="right small-icon">
+                                    <i class="large material-icons">edit</i>
+                                </span>
                             </a>
                         </div>
                     </div>
-                    <div>
+                    <article>
+                        <div>
+                            <a href="{{ path('answer_new', { 'id' : dto.id }) }}" class=" secondary-color">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </div>
                         {% for a in dto.answers %}
-                            <div>{{ a }}</div>
+                            <div class="clearfix">
+                                {{ a.label }}
+                                <a href="{{ path('answer_edit', {'id' : a.id }) }}" class="right clearfix small-icon">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                            </div>
                         {% endfor %}
-                    </div>
+                    </article>
                 {% endfor %}
             </div>
         </div>
