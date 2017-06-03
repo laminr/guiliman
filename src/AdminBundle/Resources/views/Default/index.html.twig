@@ -3,6 +3,26 @@
 {% block body %}
 
     <div class="container">
+        <!-- Dropdown Trigger -->
+        <a id="admin-menu" class="dropdown-button btn left" href='#' data-activates='dropdown1'>
+            <i class="material-icons">dehaze</i>
+        </a>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+            {#<li class="divider"></li>#}
+            <li>
+                <a href="{{ path('person_index') }}">
+                    <i class="material-icons">accessibility</i>Personnes
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('_admin_poll_index') }}">
+                    <i class="material-icons">record_voice_over</i>R&eacute;sultats
+                </a>
+            </li>
+        </ul>
+
         <h1 class="secondary-color">Administration</h1>
         <div class="row">
             <div class="col s12 m6">

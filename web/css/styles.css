@@ -2,6 +2,15 @@
   color: #30d0c1;
   font-size: 1.5em; }
 
+#admin-menu {
+  background: white;
+  color: #FF5200;
+  margin-top: 15px; }
+
+.title {
+  color: #30d0c1;
+  font-size: 1.5em; }
+
 header {
   background: #180d0c;
   padding: 50px 0 0;
@@ -117,6 +126,12 @@ article {
     margin-bottom: 20px; }
   article strong {
     font-weight: bold; }
+
+.box {
+  background: white;
+  border-radius: 2px;
+  border: 1px solid #d4d4d4;
+  padding: 5px; }
 
 .secondary-color {
   color: #FF5200; }

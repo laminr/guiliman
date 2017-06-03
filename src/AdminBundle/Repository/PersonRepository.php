@@ -37,7 +37,7 @@ class PersonRepository extends \Doctrine\ORM\EntityRepository
     public function getTotalShare()
     {
 
-        $sql = 'SELECT SUM(p.share) as nbr FROM ' . Person::CLASS_NAME . ' p ';
+        $sql = 'SELECT SUM(p.action + p.obligation) as nbr FROM ' . Person::CLASS_NAME . ' p ';
         $query = $this->getEntityManager()->createQuery($sql);
 
         return $query->getResult()[0];
