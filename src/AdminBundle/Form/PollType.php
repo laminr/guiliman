@@ -20,7 +20,6 @@ class PollType extends AbstractType
 
         $builder
             ->add('person')
-//            ->add('question')
             ->add('answer', EntityType::class, array(
                 'class' => Answer::CLASS_NAME,
                 'query_builder' => function (AnswerRepository $er) use ($questionId) {
@@ -28,8 +27,6 @@ class PollType extends AbstractType
                         ->where('a.question = :id')
                         ->setParameter('id', $questionId);
                 },
-//                'expanded' => false,
-//                'multiple' => true
             ));
     }
     

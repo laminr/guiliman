@@ -13,9 +13,8 @@
                     {#<td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.id }}</a></td>#}
                     <div class="col s5">&nbsp;</div>
                     <div class="col s6">
-                        <div class="col s4 text-center">Action</div>
-                        <div class="col s4 text-center">Obligation</div>
-                        <div class="col s4 text-center">Total</div>
+                        <div class="col s6 text-center">Actions</div>
+                        <div class="col s6 text-center">Obligations</div>
                     </div>
                     <div class="col s1">&nbsp;</div>
                 </div>
@@ -27,9 +26,8 @@
                         {{ person.firstname }} {{ person.lastname }}
                         </div>
                         <div class="col s6">
-                            <div class="col s4 figures">{{ person.action }}</div>
-                            <div class="col s4 figures">{{ person.obligation }}</div>
-                            <div class="col s4 figures">{{ person.share }}</div>
+                            <div class="col s6 figures">{{ person.action }}</div>
+                            <div class="col s6 figures">{{ person.obligation }}</div>
                         </div>
                         <div class="col s1">
                             <a href="{{ path('person_edit', { 'id': person.id }) }}" class="right">edit</a>
