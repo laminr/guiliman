@@ -40,9 +40,16 @@ class Person
     /**
      * @var int
      *
-     * @ORM\Column(name="share", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="action", type="decimal", precision=10, scale=2)
      */
-    private $share;
+    private $action;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="obligation", type="decimal", precision=10, scale=2)
+     */
+    private $obligation;
 
     /**
      * @var array
@@ -123,27 +130,13 @@ class Person
     }
 
     /**
-     * Set share
-     *
-     * @param integer $share
-     *
-     * @return Person
-     */
-    public function setShare($share)
-    {
-        $this->share = $share;
-
-        return $this;
-    }
-
-    /**
      * Get share
      *
      * @return int
      */
     public function getShare()
     {
-        return $this->share;
+        return $this->action + $this->obligation;
     }
 
     /**
@@ -181,5 +174,38 @@ class Person
     public function setUserNull() {
         $this->user = null;
     }
+
+    /**
+     * @return int
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * @param int $action
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+    }
+
+    /**
+     * @return int
+     */
+    public function getObligation()
+    {
+        return $this->obligation;
+    }
+
+    /**
+     * @param int $obligation
+     */
+    public function setObligation($obligation)
+    {
+        $this->obligation = $obligation;
+    }
+
 }
 
