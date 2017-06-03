@@ -7,7 +7,7 @@
                 <a href="{{ path('person_new') }}" class="btn right btn-floating btn-small">
                     <i class="large material-icons">add</i>
                 </a>
-                <h1>People list</h1>
+                <h1>Liste des Actionnaires</h1>
 
                 <div class="row">
                     {#<td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.id }}</a></td>#}
@@ -26,8 +26,8 @@
                         {{ person.firstname }} {{ person.lastname }}
                         </div>
                         <div class="col s6">
-                            <div class="col s6 figures">{{ person.action }}</div>
-                            <div class="col s6 figures">{{ person.obligation }}</div>
+                            <div class="col s6 figures">{{ person.action | number_format(0) }}</div>
+                            <div class="col s6 figures">{{ person.obligation | number_format(0)}}</div>
                         </div>
                         <div class="col s1">
                             <a href="{{ path('person_edit', { 'id': person.id }) }}" class="right">edit</a>

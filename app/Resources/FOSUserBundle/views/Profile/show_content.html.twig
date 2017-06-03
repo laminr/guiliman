@@ -24,13 +24,17 @@
                 Actions:
             </div>
             <div class="col s6">
-                {{ app.user.person.action }}
+                <span class="figures">
+                {{ app.user.person.action | number_format(0) }}
+                </span>
             </div>
             <div class="col s6">
                 Obligations:
             </div>
             <div class="col s6">
-                {{ app.user.person.obligation }}
+                <span class="figures">
+                    {{ app.user.person.obligation | number_format(0) }}
+                </span>
             </div>
         </div>
     </div>
