@@ -20,7 +20,18 @@
             </a>
         </div>
         <div>
-            Mes parts: {{ app.user.person.share }}
+            <div class="col s6">
+                Actions:
+            </div>
+            <div class="col s6">
+                {{ app.user.person.action }}
+            </div>
+            <div class="col s6">
+                Obligations:
+            </div>
+            <div class="col s6">
+                {{ app.user.person.obligation }}
+            </div>
         </div>
     </div>
 </div>
