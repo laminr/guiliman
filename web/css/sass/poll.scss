@@ -2,13 +2,17 @@
 
 .poll-item {
 
-  font-size: 1.3em;
+  font-size: 1.2em;
   border-radius: 2px;
   margin-bottom: 5px;
   padding: 5px 10px;
 
   & > div {
     border: 1px solid black;
+  }
+
+  .question-title {
+    line-height: 2em;
   }
 }
 

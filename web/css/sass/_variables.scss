@@ -34,8 +34,10 @@ $color-footer: $color-secondary-dark;
 $font-poiret: 'Poiret One', cursive;
 $font-figures: 'Anton', sans-serif;
 $font-century: 'Muli', sans-serif;
+$font-balthazar: 'Balthazar', serif;
 
-$font-family-title: $font-century;
+$font-family: $font-century;
+$font-family-title: $font-balthazar;
 
 .title {
   color: $color-primary-light;

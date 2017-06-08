@@ -56,13 +56,15 @@ body {
   background: #f1f1f1; }
 
 .btn-red {
-  background-color: #b90000;
-  font-family: "Anton", sans-serif; }
+  background-color: #b90000; }
   .btn-red:hover {
     background-color: #e80000; }
 
 a.link {
   color: #26a69a !important; }
+
+h2 {
+  font-size: 2.5em; }
 
 .question-title-sum {
   background: #180d0c;
@@ -86,7 +88,7 @@ th {
 
 h1 {
   margin-top: 50px;
-  font-family: "Muli", sans-serif;
+  font-family: "Balthazar", serif;
   color: #30d0c1;
   text-align: center; }
 
@@ -145,12 +147,14 @@ article {
   font-size: 1.5em; }
 
 .poll-item {
-  font-size: 1.3em;
+  font-size: 1.2em;
   border-radius: 2px;
   margin-bottom: 5px;
   padding: 5px 10px; }
   .poll-item > div {
     border: 1px solid black; }
+  .poll-item .question-title {
+    line-height: 2em; }
 
 .question-title {
   background: #180d0c;

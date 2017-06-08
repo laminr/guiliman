@@ -1,13 +1,13 @@
 @import "variables";
 
 body {
-  font-family: $font-family-title;
+  font-family: $font-family;
   background: #f1f1f1;
 }
 
 .btn-red {
   background-color: #b90000;
-  font-family: $font-figures;
+  //font-family: $font-figures;
 
   &:hover {
     background-color: #e80000;
@@ -16,6 +16,10 @@ body {
 
 a.link {
   color : $color-primary !important;
+}
+
+h2 {
+  font-size: 2.5em;
 }
 
 .question-title-sum {
