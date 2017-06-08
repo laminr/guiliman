@@ -56,7 +56,9 @@
 </head>
 <body id="{% block pageId %}{% endblock %}" >
 
+{% block header %}
     {{ include('::header.html.twig') }}
+{% endblock %}
 
     {% block body %}{% endblock %}
 
