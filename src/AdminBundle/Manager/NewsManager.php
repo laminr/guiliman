@@ -21,7 +21,7 @@ class NewsManager extends BaseManager
     }
 
     public function findAllPublished() {
-        return $this->getRepository()->findBy(['published' => true], ['publication' => 'DESC']);
+        return $this->getRepository()->findBy(['published' => true], ['publication' => 'ASC']);
     }
 
     public function findById($id) {
