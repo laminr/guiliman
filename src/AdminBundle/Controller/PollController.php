@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Dto\QuestionResult;
 use AdminBundle\Entity\Answer;
 use AdminBundle\Entity\Poll;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,10 +26,33 @@ class PollController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $polls = $em->getRepository('AdminBundle:Poll')->findAll();
+        $answers = [];
+        $questions = $em->getRepository('AdminBundle:Question')->findAll();
+        $persons = $em->getRepository('AdminBundle:Person')->findAll();
+
+        foreach ($questions as $question) {
+            $dto = new QuestionResult();
+            $polls = $question->getPolls();
+            $dto->setQuestion($polls[0]->getQuestion());
+            $dto->setPolls($polls);
+
+            $here = [];
+            foreach ($question->getPolls() as $poll) {
+                $here[] = $poll->getPerson();
+            }
+
+            $missing = [];
+            foreach (array_diff($persons, $here) as $key => $value) {
+                $missing[] = $value;
+            }
+
+            $dto->setWaitings($missing);
+
+            $answers[] = $dto;
+        }
 
         return $this->render('AdminBundle:poll:index.html.twig', array(
-            'polls' => $polls,
+            'answers' => $answers,
         ));
     }
 
@@ -43,7 +67,7 @@ class PollController extends Controller
         $poll = new Poll();
         $form = $this->createForm(
             'AdminBundle\Form\PollType',
-                $poll,
+            $poll,
             ['attr' => ['questionId' => 0]]
         );
         $form->handleRequest($request);
@@ -143,8 +167,7 @@ class PollController extends Controller
                         'answerId' =>  $poll->getAnswer()->getId()
                     ]
                 );
-            }
-            // Just update
+            } // Just update
             else {
                 echo 5;
                 //$this->getDoctrine()->getManager()->flush();
@@ -231,7 +254,6 @@ class PollController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('poll_delete', array('id' => $poll->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

@@ -44,7 +44,6 @@ class Answer
     private $polls;
 
 
-
     public function setId($id)
     {
         $this->id = $id;
@@ -107,5 +106,23 @@ class Answer
     {
         $this->question = $question;
     }
+
+
+    /**
+     * @return array
+     */
+    public function getPolls(): array
+    {
+        return $this->polls;
+    }
+
+    /**
+     * @param array $polls
+     */
+    public function setPolls(array $polls)
+    {
+        $this->polls = $polls;
+    }
+
 }
 

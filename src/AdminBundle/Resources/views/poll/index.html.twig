@@ -3,17 +3,17 @@
 {% block body %}
 
     <main class="container">
-        <div class="row">
-            <div class="col s12">
-                <h1>Polls list</h1>
+        <h1>Polls list</h1>
+        {% for answer in answers %}
+            <h2>{{ answer.question }}</h2>
+            <article class="row">
                 {#<a class="right btn" href="{{ path('_admin_poll_new') }}">#}
-                    {#Create a new poll#}
+                {#Create a new poll#}
                 {#</a>#}
 
-                <table>
+                <table class="col s12 m8 l6 offset-m2 offset-l3">
                     <thead>
                     <tr>
-                        <th>Question</th>
                         <th>Person</th>
                         <th>Share</th>
                         <th>Answer</th>
@@ -21,27 +21,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for poll in polls %}
+                    {% for poll in answer.polls %}
                         <tr>
-                            <td>{{ poll.question }}</td>
                             <td>{{ poll.person }}</td>
                             <td>{{ poll.person.share }}</td>
                             <td>{{ poll.answer }}</td>
-{#                            <td>
-                                <ul>
-                                    <li>
-                                        <a href="{{ path('poll_show', { 'id': poll.id }) }}">show</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('poll_edit', { 'id': poll.id }) }}">edit</a>
-                                    </li>
-                                </ul>
-                            </td>#}
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-            </div>
-        </div>
+                <div class="col s12">
+                    <h4>Waiting</h4>
+                    <div>
+                        {% for waiting in answer.waitings %}
+                            {{ waiting }}{% if loop.index < loop.length %},{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
     </main>
 {% endblock %}
